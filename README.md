@@ -12,14 +12,6 @@ This is a custom React project that integrates the TinyMCE editor and enhances t
   - Cleans rogue `o:p` tags from Excel content.
 - **Customizable Logic**: Easily extendable to handle other sources or further modify the cleaning logic.
 
-## Project Preview
-
-<div align="center">
-  <video controls style="width: 100%; max-width: 640px;">
-    <source src="public/videos/demo.mp4" type="video/mp4">
-  </video>
-</div>
-
 ## Project Setup
 
 ### Prerequisites
@@ -31,25 +23,28 @@ This is a custom React project that integrates the TinyMCE editor and enhances t
 ### Installation
 
 1. Clone the repository:
-   \`\`\`bash
-   git clone https://github.com/your-username/tinymce-paste-extension.git
+
+   ```bash
+   git clone https://github.com/anwarhossain1/tinymce-paste-extension.git
    cd tinymce-paste-extension
-   \`\`\`
+   ```
 
 2. Install the dependencies:
-   \`\`\`bash
+
+   ```bash
    npm install
-   \`\`\`
+   ```
 
 3. Set up your environment variables by creating a `.env` file at the root of the project and adding your TinyMCE API key:
-   \`\`\`
+
+   ```
    VITE_TINYMCE_API_KEY=your_tinymce_api_key
-   \`\`\`
+   ```
 
 4. Start the development server:
-   \`\`\`bash
+   ```bash
    npm run dev
-   \`\`\`
+   ```
 
 ### Usage
 
