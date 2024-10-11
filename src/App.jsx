@@ -11,6 +11,36 @@ function App() {
   };
   const tinymceApiKey = import.meta.env.VITE_TINYMCE_API_KEY
 
+  const detectSource = (html) => {
+    if (html.includes("<!--StartFragment-->") || html.includes("mso-")) {
+      return "MSOffice";
+    }
+    if (html.includes("docs-internal-guid") || html.includes('class="Google"')) {
+      return "GoogleDocs";
+    }
+    if (html.includes("<table") && html.includes("<tr")) {
+      return "Excel";
+    }
+    return "Unknown";
+  };
+
+  const cleanHTML = (html, source) => {
+    if (source === "MSOffice") {
+      return html.replace(/<!--.*?-->/g, "").replace(/style=".*?"/g, "");
+    }
+    if (source === "GoogleDocs") {
+      return html.replace(/<style.*?<\/style>/g, "").replace(/class=".*?"/g, "");
+    }
+    if (source === "Excel") {
+      return html.replace(/<o:p>/g, "").replace(/<\/o:p>/g, "");
+    }
+    return html;
+  };
+
+  const stripFormatting = (html) => {
+    return html.replace(/style=".*?"/g, "").replace(/<span.*?>/g, "").replace(/<\/span>/g, "");
+  };
+
   return (
     <>
     <Editor
@@ -21,15 +51,28 @@ function App() {
         height: 500,
         menubar: false,
         plugins: [
-          'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
-          'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
-          'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount'
+         'paste'
         ],
         toolbar: 'undo redo | blocks | ' +
           'bold italic forecolor | alignleft aligncenter ' +
           'alignright alignjustify | bullist numlist outdent indent | ' +
           'removeformat | help',
-        content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+        content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
+        setup : (editor)=>{
+          editor.on("pastepreprocess", (e) => {
+            const clipboardData = e.content;
+            const source = detectSource(clipboardData);
+            if (source === "MSOffice" || source === "GoogleDocs" || source === "Excel") {
+              e.content = cleanHTML(clipboardData, source);
+              const keepFormatting = window.confirm("Do you want to keep the formatting?");
+              if (!keepFormatting) {
+                e.content = stripFormatting(e.content);
+              }
+            }
+          
+          })
+
+        }
       }}
     />
     <button onClick={log}>Log editor content</button>
