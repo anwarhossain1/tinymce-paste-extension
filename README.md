@@ -12,6 +12,14 @@ This is a custom React project that integrates the TinyMCE editor and enhances t
   - Cleans rogue `o:p` tags from Excel content.
 - **Customizable Logic**: Easily extendable to handle other sources or further modify the cleaning logic.
 
+## Project Preview
+
+<div align="center">
+  <video controls style="width: 100%; max-width: 640px;">
+    <source src="public/videos/demo.mp4" type="video/mp4">
+  </video>
+</div>
+
 ## Project Setup
 
 ### Prerequisites
@@ -62,10 +70,6 @@ The TinyMCE editor will allow you to paste content from MS Office, Google Docs, 
 - **\`stripFormatting(html)\`**: Strips all styles and extra elements to produce a clean, plain-text-like HTML insertion.
 - **\`openKeepFormattingDialog(editor, content, callback)\`**: Opens a custom dialog in TinyMCE allowing the user to choose whether to keep formatting or not.
 
-### Example
-
-![UI Example](https://your-image-url.com/example.png)
-
 ## Future Improvements
 
 - Add support for detecting other document sources like PDFs or other online document editors.
@@ -74,10 +78,6 @@ The TinyMCE editor will allow you to paste content from MS Office, Google Docs, 
 ## Contributing
 
 Feel free to submit pull requests or open issues to enhance the project.
-
-## License
-
-This project is open-source and available under the [MIT License](LICENSE).
 
 ## Acknowledgments
 
