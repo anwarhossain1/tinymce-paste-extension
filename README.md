@@ -1,4 +1,4 @@
-# TinyMCE Custom Paste Extension for React
+# TinyMCE Custom Paste Extension in React
 
 This is a custom React project that integrates the TinyMCE editor and enhances the paste functionality to handle content pasted from sources like Microsoft Office, Google Docs, and Excel. It detects the source of the pasted content and provides the user with an option to either keep the original formatting or strip the formatting before inserting it into the editor.
 
